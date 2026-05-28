@@ -58,7 +58,7 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--text-primary);
   line-height: 1.6;
   font-size: 16px;
@@ -68,7 +68,7 @@ body {
 
 /* Typography */
 h1, h2, h3, h4 {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lato', sans-serif;
 }
 
 a {
