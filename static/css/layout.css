@@ -1,0 +1,58 @@
+/* ========== Layout: Sections, Spacing, Responsive ========== */
+
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.hero-body {
+  padding: 4rem 1.5rem;
+}
+
+.hero.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 4rem;
+}
+
+/* Section alternating backgrounds */
+.section--alt {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Figure placeholders */
+.figure-placeholder {
+  background: var(--bg-accent);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  text-align: center;
+  margin: 2rem 0;
+  color: var(--text-light);
+  font-size: 0.9rem;
+}
+
+.figure-placeholder i {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .section {
+    padding: 2.5rem 1rem;
+  }
+
+  .hero-body {
+    padding: 2.5rem 1rem;
+  }
+
+  .teaser-comparison {
+    flex-direction: column;
+  }
+
+  .teaser-vs {
+    margin: 1rem 0;
+  }
+}

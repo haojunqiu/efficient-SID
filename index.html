@@ -3,518 +3,480 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-  <!-- Primary Meta Tags -->
-  <!-- TODO: Replace with your paper title and author names -->
-  <meta name="title" content="PAPER_TITLE - AUTHOR_NAMES">
-  <!-- TODO: Write a compelling 150-160 character description of your research -->
-  <meta name="description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Add 5-10 relevant keywords for your research area -->
-  <meta name="keywords" content="KEYWORD1, KEYWORD2, KEYWORD3, machine learning, computer vision, AI">
-  <!-- TODO: List all authors -->
-  <meta name="author" content="FIRST_AUTHOR_NAME, SECOND_AUTHOR_NAME">
-  <meta name="robots" content="index, follow">
-  <meta name="language" content="English">
-  
-  <!-- Open Graph / Facebook -->
+  <meta name="title" content="Efficient and Training-Free Single-Image Diffusion Models">
+  <meta name="description" content="A training-free single-image diffusion model using closed-form denoisers. Megapixel generation in under one second, gigapixel in minutes. CVPR 2026 Highlight.">
+  <meta name="keywords" content="single-image generation, diffusion models, training-free, patch-based, closed-form denoiser, computer vision">
+  <meta name="author" content="Haojun Qiu, Kiriakos N. Kutulakos, David B. Lindell">
+
+  <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <!-- TODO: Replace with your institution or lab name -->
-  <meta property="og:site_name" content="INSTITUTION_OR_LAB_NAME">
-  <!-- TODO: Same as paper title above -->
-  <meta property="og:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta property="og:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Replace with your actual website URL -->
-  <meta property="og:url" content="https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE">
-  <!-- TODO: Create a 1200x630px preview image and update path -->
-  <meta property="og:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="PAPER_TITLE - Research Preview">
-  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
-  <meta property="article:author" content="FIRST_AUTHOR_NAME">
-  <meta property="article:section" content="Research">
-  <meta property="article:tag" content="KEYWORD1">
-  <meta property="article:tag" content="KEYWORD2">
+  <meta property="og:title" content="Efficient and Training-Free Single-Image Diffusion Models">
+  <meta property="og:description" content="Training-free single-image diffusion via closed-form denoisers. CVPR 2026 Highlight.">
+  <meta property="og:url" content="https://haojunqiu.github.io/efficient-SID/">
+  <meta property="og:image" content="https://haojunqiu.github.io/efficient-SID/static/images/social_preview.png">
 
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- TODO: Replace with your lab/institution Twitter handle -->
-  <meta name="twitter:site" content="@YOUR_TWITTER_HANDLE">
-  <!-- TODO: Replace with first author's Twitter handle -->
-  <meta name="twitter:creator" content="@AUTHOR_TWITTER_HANDLE">
-  <!-- TODO: Same as paper title above -->
-  <meta name="twitter:title" content="PAPER_TITLE">
-  <!-- TODO: Same as description above -->
-  <meta name="twitter:description" content="BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS">
-  <!-- TODO: Same as social preview image above -->
-  <meta name="twitter:image" content="https://YOUR_DOMAIN.com/static/images/social_preview.png">
-  <meta name="twitter:image:alt" content="PAPER_TITLE - Research Preview">
+  <!-- Citation -->
+  <meta name="citation_title" content="Efficient and Training-Free Single-Image Diffusion Models">
+  <meta name="citation_author" content="Qiu, Haojun">
+  <meta name="citation_author" content="Kutulakos, Kiriakos N.">
+  <meta name="citation_author" content="Lindell, David B.">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="CVPR 2026">
 
-  <!-- Academic/Research Specific -->
-  <meta name="citation_title" content="PAPER_TITLE">
-  <meta name="citation_author" content="FIRST_AUTHOR_LAST, FIRST_AUTHOR_FIRST">
-  <meta name="citation_author" content="SECOND_AUTHOR_LAST, SECOND_AUTHOR_FIRST">
-  <meta name="citation_publication_date" content="2024">
-  <meta name="citation_conference_title" content="CONFERENCE_NAME">
-  <meta name="citation_pdf_url" content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf">
-  
-  <!-- Additional SEO -->
-  <meta name="theme-color" content="#2563eb">
-  <meta name="msapplication-TileColor" content="#2563eb">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  
-  <!-- Preconnect for performance -->
+  <title>Efficient and Training-Free Single-Image Diffusion Models | CVPR 2026 Highlight</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+
+  <!-- Fonts (multiple options for preview) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://ajax.googleapis.com">
-  <link rel="preconnect" href="https://documentcloud.adobe.com">
-  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
 
-
-  <!-- TODO: Replace with your paper title and authors -->
-  <title>PAPER_TITLE - AUTHOR_NAMES | Academic Research</title>
-  
-  <!-- Favicon and App Icons -->
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link rel="apple-touch-icon" href="static/images/favicon.ico">
-  
-  <!-- Critical CSS - Load synchronously -->
+  <!-- CSS (order matters) -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-  
-  <!-- Non-critical CSS - Load asynchronously -->
-  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  
-  <!-- Fallback for browsers that don't support preload -->
-  <noscript>
-    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  </noscript>
-  
-  <!-- Fonts - Optimized loading -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <!-- Defer non-critical JavaScript -->
-  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script defer src="static/js/bulma-carousel.min.js"></script>
-  <script defer src="static/js/bulma-slider.min.js"></script>
-  <script defer src="static/js/index.js"></script>
-  
-  <!-- Structured Data for Academic Papers -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ScholarlyArticle",
-    "headline": "PAPER_TITLE",
-    "description": "BRIEF_DESCRIPTION_OF_YOUR_RESEARCH_CONTRIBUTION_AND_FINDINGS",
-    "author": [
-      {
-        "@type": "Person",
-        "name": "FIRST_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      },
-      {
-        "@type": "Person",
-        "name": "SECOND_AUTHOR_NAME",
-        "affiliation": {
-          "@type": "Organization",
-          "name": "INSTITUTION_NAME"
-        }
-      }
-    ],
-    "datePublished": "2024-01-01",
-    "publisher": {
-      "@type": "Organization",
-      "name": "CONFERENCE_OR_JOURNAL_NAME"
-    },
-    "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
-    "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
-    "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "machine learning", "computer vision"],
-    "abstract": "FULL_ABSTRACT_TEXT_HERE",
-    "citation": "BIBTEX_CITATION_HERE",
-    "isAccessibleForFree": true,
-    "license": "https://creativecommons.org/licenses/by/4.0/",
-    "mainEntity": {
-      "@type": "WebPage",
-      "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
-    },
-    "about": [
-      {
-        "@type": "Thing",
-        "name": "RESEARCH_AREA_1"
-      },
-      {
-        "@type": "Thing", 
-        "name": "RESEARCH_AREA_2"
-      }
-    ]
-  }
-  </script>
-  
-  <!-- Website/Organization Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "INSTITUTION_OR_LAB_NAME",
-    "url": "https://YOUR_INSTITUTION_WEBSITE.com",
-    "logo": "https://YOUR_DOMAIN.com/static/images/favicon.ico",
-    "sameAs": [
-      "https://twitter.com/YOUR_TWITTER_HANDLE",
-      "https://github.com/YOUR_GITHUB_USERNAME"
-    ]
-  }
-  </script>
+  <link rel="stylesheet" href="static/css/base.css">
+  <link rel="stylesheet" href="static/css/layout.css">
+  <link rel="stylesheet" href="static/css/components.css">
+  <link rel="stylesheet" href="static/css/animations.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <!-- JS -->
+  <script defer src="static/js/vendor/fontawesome.all.min.js"></script>
+  <script defer src="static/js/main.js"></script>
 </head>
 <body>
 
+  <!-- Font Switcher (dev tool — remove before deploy) -->
+  <div class="font-switcher">
+    <label class="font-switcher__label">Font:</label>
+    <select id="fontSelect" onchange="switchFont(this.value)">
+      <optgroup label="Google Fonts">
+        <option value="'Inter'">Inter</option>
+        <option value="'Source Sans 3'">Source Sans 3</option>
+        <option value="'DM Sans'">DM Sans</option>
+        <option value="'Plus Jakarta Sans'">Plus Jakarta Sans</option>
+        <option value="'Outfit'">Outfit</option>
+        <option value="'Manrope'">Manrope</option>
+        <option value="'Lato'">Lato</option>
+      </optgroup>
+      <optgroup label="System Fonts (macOS)">
+        <option value="'Avenir'">Avenir</option>
+        <option value="'Avenir Next'">Avenir Next</option>
+        <option value="'Palatino'">Palatino</option>
+      </optgroup>
+      <optgroup label="Serif / Display">
+        <option value="'Linux Libertine O'">Linux Libertine O</option>
+        <option value="'Linux Biolinum O'">Linux Biolinum O</option>
+      </optgroup>
+    </select>
+  </div>
 
-  <!-- Scroll to Top Button -->
-  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+  <!-- Scroll to Top -->
+  <button class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <!-- More Works Dropdown -->
-  <div class="more-works-container">
-    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
-      <i class="fas fa-flask"></i>
-      More Works
-      <i class="fas fa-chevron-down dropdown-arrow"></i>
-    </button>
-    <div class="more-works-dropdown" id="moreWorksDropdown">
-      <div class="dropdown-header">
-        <h4>More Works from Our Lab</h4>
-        <button class="close-btn" onclick="toggleMoreWorks()">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="works-list">
-        <!-- TODO: Replace with your lab's related works -->
-        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
-          <div class="work-info">
-            <!-- TODO: Replace with actual paper title -->
-            <h5>Paper Title 1</h5>
-            <!-- TODO: Replace with brief description -->
-            <p>Brief description of the work and its main contribution.</p>
-            <!-- TODO: Replace with venue and year -->
-            <span class="work-venue">Conference/Journal 2024</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <!-- TODO: Add more related works or remove extra items -->
-        <a href="https://arxiv.org/abs/PAPER_ID_2" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 2</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-        <a href="https://arxiv.org/abs/PAPER_ID_3" class="work-item" target="_blank">
-          <div class="work-info">
-            <h5>Paper Title 3</h5>
-            <p>Brief description of the work and its main contribution.</p>
-            <span class="work-venue">Conference/Journal 2023</span>
-          </div>
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-    </div>
-  </div>
 
-  <main id="main-content">
+  <!-- ==================== HERO ==================== -->
   <section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Academic Project Page</h1>
+
+            <div class="highlight-badge">
+              <i class="fas fa-award"></i> CVPR 2026 Highlight
+            </div>
+
+            <h1 class="title is-1 publication-title">
+              Efficient and Training-Free<br>Single-Image Diffusion Models
+            </h1>
+
             <div class="is-size-5 publication-authors">
-              <!-- TODO: Replace with your paper authors and their personal links -->
-              <span class="author-block">
-                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
-                <span class="author-block">
-                  <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
-                  <span class="author-block">
-                    <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a>
-                  </span>
-                  </div>
+              <span class="author-block"><a href="https://haojunqiu.github.io/" target="_blank">Haojun Qiu</a>,</span>
+              <span class="author-block"><a href="https://www.cs.toronto.edu/~kyros/" target="_blank">Kiriakos N. Kutulakos</a>,</span>
+              <span class="author-block"><a href="https://davidlindell.com/" target="_blank">David B. Lindell</a></span>
+            </div>
 
-                  <div class="is-size-5 publication-authors">
-                    <!-- TODO: Replace with your institution and conference/journal info -->
-                    <span class="author-block">Institution Name<br>Conference name and year</span>
-                    <!-- TODO: Remove this line if no equal contribution -->
-                    <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
-                  </div>
+            <div class="is-size-6 publication-authors" style="color: var(--text-secondary);">
+              <span class="author-block">University of Toronto &nbsp;·&nbsp; Vector Institute</span>
+            </div>
 
-                  <div class="column has-text-centered">
-                    <div class="publication-links">
-                         <!-- TODO: Update with your arXiv paper ID -->
-                      <span class="link-block">
-                        <a href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf" target="_blank"
-                        class="external-link button is-normal is-rounded is-dark">
-                        <span class="icon">
-                          <i class="fas fa-file-pdf"></i>
-                        </span>
-                        <span>Paper</span>
-                      </a>
-                    </span>
-
-                    <!-- TODO: Add your supplementary material PDF or remove this section -->
-                    <span class="link-block">
-                      <a href="static/pdfs/supplementary_material.pdf" target="_blank"
-                      class="external-link button is-normal is-rounded is-dark">
-                      <span class="icon">
-                        <i class="fas fa-file-pdf"></i>
-                      </span>
-                      <span>Supplementary</span>
-                    </a>
-                  </span>
-
-                  <!-- TODO: Replace with your GitHub repository URL -->
-                  <span class="link-block">
-                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
-                    class="external-link button is-normal is-rounded is-dark">
-                    <span class="icon">
-                      <i class="fab fa-github"></i>
-                    </span>
-                    <span>Code</span>
-                  </a>
-                </span>
-
-                <!-- TODO: Update with your arXiv paper ID -->
-                <span class="link-block">
-                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    <i class="ai ai-arxiv"></i>
-                  </span>
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
                   <span>arXiv</span>
                 </a>
               </span>
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== TEASER ==================== -->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+
+        <div class="teaser-comparison">
+          <!-- Trained methods card -->
+          <div class="teaser-card teaser-card--trained">
+            <div class="teaser-card__header">
+              <span class="teaser-card__label">Trained Methods (SinDDM)</span>
+            </div>
+            <div class="teaser-card__content">
+              <div class="training-progress">
+                <div class="training-progress__bar">
+                  <div class="training-progress__fill"></div>
+                </div>
+                <div class="training-progress__time">Training... <span class="time-counter">0:00:00</span></div>
+              </div>
+              <div class="placeholder-grid">
+                <div class="placeholder-item"></div>
+                <div class="placeholder-item"></div>
+                <div class="placeholder-item"></div>
+              </div>
+              <p class="waiting-text">Waiting for training to finish...</p>
+            </div>
+            <div class="teaser-card__footer">
+              <span class="stat">~10 hours training</span>
+              <span class="stat">18.5s inference</span>
+            </div>
+          </div>
+
+          <div class="teaser-vs">vs</div>
+
+          <!-- Ours card -->
+          <div class="teaser-card teaser-card--ours">
+            <div class="teaser-card__header">
+              <span class="teaser-card__label">Ours (Training-Free)</span>
+              <span class="teaser-card__badge">✓ Ready</span>
+            </div>
+            <div class="teaser-card__content">
+              <div class="placeholder-grid placeholder-grid--active">
+                <div class="placeholder-item placeholder-item--result"></div>
+                <div class="placeholder-item placeholder-item--result"></div>
+                <div class="placeholder-item placeholder-item--result"></div>
+              </div>
+              <p class="ready-text">Diverse results in &lt;1 second</p>
+            </div>
+            <div class="teaser-card__footer">
+              <span class="stat stat--highlight">0s training</span>
+              <span class="stat stat--highlight">&lt;1s inference</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="subtitle has-text-centered" style="margin-top: 2rem; font-size: 1.15rem;">
+          <strong>Zero training. One second. Diverse generation.</strong><br>
+          <span style="color: var(--text-secondary);">A closed-form denoiser eliminates neural network training — generating megapixel images in under a second, gigapixel in minutes.</span>
+        </h2>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== ABSTRACT ==================== -->
+  <section class="section section--alt">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We consider the problem of generating images whose internal structure—defined by the distribution of patches across multiple scales—matches that of a single reference image. Recent approaches address this problem by training a diffusion model on a single image. But even in this setting, training is computationally expensive and requires hours of optimization. Instead, we model the image using a dataset of its patches at different scales. As this dataset is finite and the dimensionality of its patches is small, the score function for a noisy patch can be computed tractably using an optimal, closed-form denoiser, eliminating the need for neural network training. We integrate this patch-based denoiser into an efficient, training-free image diffusion model, and we describe how our method connects to classical patch-based image restoration techniques. Our approach achieves state-of-the-art generation quality and diversity compared to trained single-image diffusion models, and we demonstrate applications, including unconditional image generation, text-guided stylization, image symmetrization, and retargeting. Further, we show that our approach is compatible with latent space diffusion, and we show multiple additional acceleration techniques to achieve megapixel single-image generation in one second, and gigapixel generation in minutes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== WHY THIS MATTERS ==================== -->
+  <section class="section reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Why Single-Image Generation Still Matters</h2>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              Large models condition on a reference image through cross-attention — they <em>see</em> it. But seeing is not sampling. The model still generates through its internet-scale prior. It knows what "mosaic" means generically, but it cannot reproduce <em>this specific</em> mosaic's tiles, grout lines, and palette.
+            </p>
+            <p>
+              Our method samples directly from the patch distribution of the reference image. The output is literally composed of patches from the input — every texture, every pattern, traceable back to the source.
+            </p>
+            <p>
+              Any time your "dataset" is a single observation — a Mars rover panorama, a hyperspectral satellite scan, a rare histology slide, or a unique painted canvas — the whole internet is the wrong prior. <strong>The right prior is the patches of the image in front of you.</strong>
+            </p>
+          </div>
+
+          <!-- Placeholder for comparison figure -->
+          <div class="figure-placeholder">
+            <i class="fas fa-image"></i>
+            [Figure: Reference mosaic → Large model output (wrong) → Our output (faithful)]<br>
+            <em>"Large models <strong>see</strong> the reference. We <strong>sample</strong> from it."</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== METHOD ==================== -->
+  <section class="section section--alt reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Method: Closed-Form Denoiser</h2>
+        </div>
+      </div>
+
+      <!-- Insight -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The optimal denoiser in diffusion models has a known closed-form solution: a weighted average over all clean signals, where weights reflect how likely each produced the noisy input. For large datasets like ImageNet (millions of high-dimensional images), this sum is completely intractable — and as noise decreases, it collapses to memorization.
+            </p>
+            <p>
+              <strong>But for patches of a single image, both problems disappear.</strong> The dataset is finite and low-dimensional — the sum is tractable. And since we denoise <em>patches</em>, not whole images, stitching overlapping patch predictions together produces a rich distribution over global images, not a copy of the input.
+            </p>
+            <p style="font-size: 1.15rem; font-weight: 600; text-align: center; color: var(--text-primary); margin: 2rem 0;">
+              No neural network. No training. No optimization.
+            </p>
+          </div>
+
+          <!-- Placeholder: insight figure -->
+          <div class="figure-placeholder">
+            <i class="fas fa-image"></i>
+            [Figure: ImageNet (N huge, D huge) → ✗ intractable &nbsp;|&nbsp; Single-image patches (N small, D small) → ✓ fast &amp; exact]
+          </div>
+
+          <!-- Pipeline -->
+          <h3 class="title is-4 has-text-centered" style="margin-top: 3rem;">Generation Pipeline</h3>
+          <div class="content has-text-justified">
+            <p>
+              We extract overlapping patches from the reference image as our dataset. Starting from noise, at each timestep we extract noisy patches, apply the closed-form denoiser, and stitch predictions back into a full image. We generate at a coarse scale first to establish global structure, then progressively add finer scales — preserving layout while adding detail.
+            </p>
+          </div>
+
+          <!-- Placeholder: animated pipeline -->
+          <div class="figure-placeholder">
+            <i class="fas fa-film"></i>
+            [Animated Pipeline: Input → Extract patches → Closed-form denoise → Coarse-to-fine → Diverse outputs]<br>
+            <em>Animation or looping video placeholder</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== ACCELERATION ==================== -->
+  <section class="section reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Acceleration: Making It Scale</h2>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The closed-form denoiser gives us the <em>training-free</em> part. But for the <em>efficient</em> part — scaling to megapixel and beyond — the naïve O(N²) cost per denoising step is a bottleneck. We use three complementary techniques:
+            </p>
+          </div>
+
+          <div class="acceleration-cards">
+            <div class="accel-card">
+              <div class="accel-card__icon">⚡</div>
+              <h4 class="accel-card__title">FlashAttention</h4>
+              <p class="accel-card__desc">The denoiser reduces to softmax(QK<sup>T</sup>)·V — exactly scaled dot-product attention. Fused kernels give 1.8× speedup, fully exact.</p>
+            </div>
+            <div class="accel-card">
+              <div class="accel-card__icon">🗜️</div>
+              <h4 class="accel-card__title">Latent Space (VAE)</h4>
+              <p class="accel-card__desc">8× spatial downsample → 64× fewer patches. Quadratic cost means ~4000× fewer FLOPs for the denoising step.</p>
+            </div>
+            <div class="accel-card">
+              <div class="accel-card__icon">🎯</div>
+              <h4 class="accel-card__title">Approximate NN</h4>
+              <p class="accel-card__desc">Cluster patches, probe nearby clusters only. N² becomes N<sup>3/2</sup> — skip far-away patches with negligible weight.</p>
+            </div>
+          </div>
+
+          <p class="has-text-centered" style="margin-top: 2rem; font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">
+            Together: megapixel in under a second · gigapixel in minutes
+          </p>
+
+          <!-- Placeholder: acceleration figure -->
+          <div class="figure-placeholder">
+            <i class="fas fa-chart-bar"></i>
+            [Figure/Animation: Resolution scaling — each technique unlocks the next tier]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== RESULTS (TBD) ==================== -->
+  <section class="section section--alt reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Results</h2>
+          <div class="figure-placeholder">
+            <i class="fas fa-images"></i>
+            [Results gallery — content and ordering TBD]<br>
+            <em>Unconditional generation · High-res · Stylization · Applications · Comparisons</em>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== COMPARISON ==================== -->
+  <section class="section reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Comparison</h2>
+        </div>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+
+          <div class="table-container">
+            <table class="table is-striped is-hoverable is-fullwidth comparison-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Training Time</th>
+                  <th>Inference Time</th>
+                  <th>SIFID ↓</th>
+                  <th>Diversity ↑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>SinDDM</td>
+                  <td>~10 hours</td>
+                  <td>18.5s</td>
+                  <td>0.089</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>SinFusion</td>
+                  <td>~3.2 hours</td>
+                  <td>~5s</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr class="is-selected">
+                  <td><strong>Ours</strong></td>
+                  <td><strong>0</strong></td>
+                  <td><strong>&lt;1s</strong></td>
+                  <td><strong>0.054</strong></td>
+                  <td><strong>Highest</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Placeholder: visual comparison -->
+          <div class="figure-placeholder">
+            <i class="fas fa-columns"></i>
+            [Figure: Side-by-side visual comparison vs baselines]
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ==================== VIDEO ==================== -->
+  <section class="section section--alt reveal">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video Presentation</h2>
+          <div class="publication-video">
+            <div class="video-placeholder">
+              <i class="fas fa-video" style="font-size: 2rem;"></i>
+              <p>Video coming soon</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
-      </h2>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-<!-- End image carousel -->
-
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
   </section>
-<!--End paper poster -->
 
 
-
-<!--BibTex citation -->
+  <!-- ==================== BIBTEX ==================== -->
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
       <div class="bibtex-header">
         <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX">
           <i class="fas fa-copy"></i>
           <span class="copy-text">Copy</span>
         </button>
       </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
+      <pre id="bibtex-code"><code>@inproceedings{qiu2026efficient,
+  title={Efficient and Training-Free Single-Image Diffusion Models},
+  author={Qiu, Haojun and Kutulakos, Kiriakos N. and Lindell, David B.},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision 
+             and Pattern Recognition (CVPR)},
+  year={2026}
 }</code></pre>
     </div>
-</section>
-<!--End BibTex citation -->
+  </section>
 
 
+  <!-- Footer -->
   <footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-
-          <p>
-            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
-            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
-
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              Built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+              Licensed under <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">CC BY-SA 4.0</a>.
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+</body>
+</html>

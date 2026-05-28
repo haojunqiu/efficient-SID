@@ -1,0 +1,180 @@
+/* ========== Animations & Scroll Reveals ========== */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scroll reveal - fade up */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Teaser comparison layout */
+.teaser-comparison {
+  display: flex;
+  align-items: stretch;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.teaser-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-light);
+  min-width: 50px;
+}
+
+/* Teaser cards */
+.teaser-card {
+  flex: 1;
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  border: 2px solid var(--border-color);
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.teaser-card--trained {
+  border-color: #fca5a5;
+  background: #fefefe;
+}
+
+.teaser-card--ours {
+  border-color: #86efac;
+  background: #f0fdf4;
+}
+
+.teaser-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.teaser-card__label {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.teaser-card__badge {
+  background: #dcfce7;
+  color: #166534;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+}
+
+.teaser-card__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.teaser-card__footer {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.teaser-card__footer .stat {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.teaser-card__footer .stat--highlight {
+  color: #166534;
+}
+
+/* Training progress bar animation */
+.training-progress {
+  margin-bottom: 1.5rem;
+}
+
+.training-progress__bar {
+  height: 8px;
+  background: #fee2e2;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.training-progress__fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #f87171, #dc2626);
+  border-radius: 4px;
+  animation: progressCrawl 20s linear infinite;
+}
+
+@keyframes progressCrawl {
+  0% { width: 0%; }
+  100% { width: 35%; }
+}
+
+.training-progress__time {
+  font-size: 0.85rem;
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.time-counter {
+  font-family: 'SF Mono', monospace;
+}
+
+/* Placeholder grid for teaser results */
+.placeholder-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.placeholder-item {
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  background: #e2e8f0;
+}
+
+.placeholder-item--result {
+  background: linear-gradient(135deg, #bbf7d0, #86efac);
+  animation: fadeInResult 1s ease forwards;
+}
+
+@keyframes fadeInResult {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.waiting-text {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.ready-text {
+  font-size: 0.85rem;
+  color: #166534;
+  font-weight: 600;
+}
