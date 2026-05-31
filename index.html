@@ -274,11 +274,22 @@
             </p>
           </div>
 
-          <!-- Placeholder for comparison figure -->
-          <div class="figure-placeholder">
-            <i class="fas fa-image"></i>
-            [Figure: Reference mosaic → Large model output (wrong) → Our output (faithful)]<br>
-            <em>"Large models <strong>see</strong> the reference. We <strong>sample</strong> from it."</em>
+          <!-- Motivation figure with video option -->
+          <div class="motivation-figure">
+            <div class="motivation-figure__static" id="motivationStatic">
+              <img src="static/images/motivation/motivation.png" alt="Why single-image generation matters" loading="lazy">
+              <button class="play-video-btn" id="playMotivationBtn">
+                <i class="fas fa-play"></i> Watch explanation (52s)
+              </button>
+            </div>
+            <div class="motivation-figure__video hidden" id="motivationVideo">
+              <video controls preload="metadata" width="100%" playsinline>
+                <source src="static/videos/motivation.mp4" type="video/mp4">
+              </video>
+              <button class="back-to-static-btn" id="backToStaticBtn">
+                <i class="fas fa-image"></i> Show static figure
+              </button>
+            </div>
           </div>
         </div>
       </div>

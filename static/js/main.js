@@ -246,6 +246,27 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+
+  // ===== Motivation figure: static/video toggle =====
+  const playBtn = document.getElementById('playMotivationBtn');
+  const backBtn = document.getElementById('backToStaticBtn');
+  const motivStatic = document.getElementById('motivationStatic');
+  const motivVideo = document.getElementById('motivationVideo');
+  if (playBtn && backBtn) {
+    playBtn.addEventListener('click', function() {
+      motivStatic.classList.add('hidden');
+      motivVideo.classList.remove('hidden');
+      var vid = motivVideo.querySelector('video');
+      vid.play().catch(function() {}); // ignore autoplay block
+    });
+    backBtn.addEventListener('click', function() {
+      var vid = motivVideo.querySelector('video');
+      vid.pause();
+      vid.currentTime = 0;
+      motivVideo.classList.add('hidden');
+      motivStatic.classList.remove('hidden');
+    });
+  }
 });
 
 // Scroll to top

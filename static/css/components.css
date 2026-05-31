@@ -288,6 +288,70 @@ code {
 }
 
 
+/* Motivation figure with video toggle */
+.motivation-figure {
+  margin-top: 2rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.motivation-figure__static {
+  position: relative;
+}
+
+.motivation-figure__static img {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+  border: 2px solid var(--border-color);
+}
+
+.play-video-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.play-video-btn:hover {
+  border-color: var(--primary);
+  background: #eff6ff;
+}
+
+.motivation-figure__video video {
+  width: 100%;
+  border-radius: var(--radius);
+  display: block;
+}
+
+.back-to-static-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.back-to-static-btn:hover {
+  border-color: var(--text-secondary);
+}
 
 /* Footer */
 .footer {
