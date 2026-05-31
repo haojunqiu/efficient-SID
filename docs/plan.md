@@ -26,21 +26,6 @@
 ### 3. Abstract
 - Paper abstract text, standard layout
 
-### 3.5. Why Single-Image Generative Modeling Still Matters
-- **Purpose**: Preempt the "why not just use Stable Diffusion / FLUX?" question
-- **Key points (aligned with video script Section 1b)**:
-  - **The mosaic example**: Show reference mosaic → ask large models to apply its style → they produce *a* mosaic but not *this* mosaic (wrong tiles, invented grout, drifted palette)
-  - **Why large models fail here**: They condition on the reference via cross-attention — they *see* it but don't *sample from* it. They still generate through their internet-scale prior ("knows what mosaic means generically")
-  - **Our method**: Samples directly from the patch distribution of the reference — output is literally composed of patches from the input (traceable back to source)
-  - **The general principle**: Any time your "dataset" is a single observation — Mars rover panorama, hyperspectral satellite scan, rare histology slide, unique painted canvas — the whole internet is the wrong prior. The right prior is the patches of the image in front of you.
-  - **Complementary to large models**: Not adversarial — can be combined (e.g., FLUX + our patch prior for inpainting/outpainting). Position as a lightweight, private, faithful alternative when internal statistics matter.
-- **Figure idea**:
-  - Left: Reference mosaic image
-  - Middle: ChatGPT / large model attempts (looks like *a* mosaic, not *this* mosaic)
-  - Right: Our result (tiles, grout, colors all traceable to source)
-  - Caption: "Large models *see* the reference. We *sample* from it."
-- **Tone**: Dramatic — set up the failure of large models first, then resolve with our approach
-
 ### 4. Method — Closed-Form Denoiser + Why It Works Here
 
 #### 4a. The Narrative / Conflict Setup
@@ -88,9 +73,23 @@
 - **Placement**: After method, before results — bridges "how it works" to "look what it can do at scale"
 
 ### 6. Results Gallery
-- **TBD** — order and content to be decided later
-- Possible subsections: unconditional generation, high-res, stylization, applications, comparisons
-- Will fill in once figures/animations are ready
+Subsections with image grids or carousels:
+
+#### 6a. Unconditional Generation
+- Input image → 4-6 diverse outputs (grid layout)
+- Multiple examples (different textures, scenes)
+
+#### 6b. High-Resolution Generation
+- Megapixel examples (with zoom-in crops to show detail)
+- Gigapixel example (maybe interactive zoom?)
+
+#### 6c. Text-Guided Stylization
+- Input + text prompt → stylized output
+- Examples: "Van Gogh", "watercolor", etc.
+
+#### 6d. Applications (compact grid)
+- Symmetrization, retargeting, structural analogies, tiling
+- Before/after side-by-side
 
 ### 7. Comparison with Baselines
 - Side-by-side visual comparison (ours vs SinDDM, SinFusion, etc.)
@@ -148,129 +147,6 @@
 
 ---
 
-## Engineering Implementation Plan
-
-### Directory Structure
-
-```
-efficient-SID/
-├── index.html                    # Main page — assembles sections, minimal logic
-├── docs/
-│   └── plan.md                   # This file
-├── static/
-│   ├── css/
-│   │   ├── bulma.min.css         # Framework (don't touch)
-│   │   ├── base.css              # Global variables, typography, utilities
-│   │   ├── layout.css            # Section layout, grid systems, responsive
-│   │   ├── components.css        # Reusable: buttons, cards, badges, tables
-│   │   ├── animations.css        # All @keyframes, transitions, scroll-triggered states
-│   │   └── sections/             # Per-section overrides (only if needed)
-│   │       ├── teaser.css
-│   │       ├── method.css
-│   │       └── acceleration.css
-│   ├── js/
-│   │   ├── main.js               # Entry point: imports, Intersection Observer setup
-│   │   ├── animations.js         # Teaser counter, scroll reveals, animation triggers
-│   │   ├── utils.js              # copyBibTeX, scrollToTop, lazy loading
-│   │   └── vendor/               # Third-party (fontawesome, etc.) — don't touch
-│   │       ├── fontawesome.all.min.js
-│   │       └── ...
-│   ├── images/
-│   │   ├── teaser/               # Teaser section assets
-│   │   ├── motivation/           # "Why it matters" comparison figure
-│   │   ├── method/               # Pipeline diagrams, insight figure
-│   │   ├── acceleration/         # Scaling charts, VAE diagram
-│   │   ├── results/              # Gallery images (subdirs per category)
-│   │   ├── comparison/           # Baseline comparison figures
-│   │   └── social_preview.png    # OG image for social sharing
-│   └── videos/
-│       ├── method_pipeline.mp4   # Animated pipeline (fallback for CSS anim)
-│       ├── coarse_to_fine.mp4    # Generation process video
-│       └── ...
-└── index.html.bak                # Old template (delete once done)
-```
-
-### Architecture Principles
-
-1. **Separation of concerns**
-   - HTML = structure + content only (no inline styles beyond placeholders)
-   - CSS = split by purpose (base/layout/components/animations), not by section
-   - JS = minimal, progressive enhancement only (site works without JS)
-
-2. **Easy to add/remove sections**
-   - Each section in `index.html` is a self-contained `<section>` block with a clear comment header
-   - To add a section: copy a section block, add content, optionally add section-specific CSS
-   - To remove: delete the `<section>` block — nothing else breaks
-
-3. **Image management**
-   - Images grouped by section in subdirectories (not flat)
-   - Naming convention: `{section}/{descriptive-name}.{ext}` (e.g., `teaser/diverse-outputs.webp`)
-   - Always provide both WebP + PNG/JPG fallback via `<picture>` element
-   - Lazy loading (`loading="lazy"`) for everything below the fold
-
-4. **CSS methodology**
-   - BEM-like naming for custom components: `.teaser-card__header`, `.accel-card__icon`
-   - CSS custom properties (variables) in `base.css` for theming — change colors in one place
-   - No `!important` in custom CSS (only in vendor overrides if unavoidable)
-   - Media queries at bottom of each CSS file, grouped by breakpoint
-
-5. **Animation strategy**
-   - CSS `@keyframes` for simple loops and transitions
-   - Intersection Observer (in `animations.js`) for scroll-triggered reveals
-   - Pre-rendered MP4/WebM for complex animations (method pipeline, coarse-to-fine)
-   - All animations respect `prefers-reduced-motion` media query
-   - Static fallback images always present (animations are progressive enhancement)
-
-6. **No build step** (keep it simple)
-   - No webpack, no bundler, no npm
-   - Just serve static files (GitHub Pages, any static host)
-   - Concatenate CSS via `<link>` tags in order (base → layout → components → animations → sections)
-   - If it ever needs a build step later, the file structure is already modular enough to plug into one
-
-### Implementation Order
-
-```
-Step 1: Scaffold file structure
-  └── Create dirs, split existing index.css into base/layout/components/animations
-
-Step 2: Write index.html skeleton
-  └── All sections with semantic markup, placeholder divs for figures
-  └── Link all CSS/JS files in correct order
-  └── Verify it renders correctly with just text + placeholders
-
-Step 3: Style pass
-  └── base.css: variables, typography, resets
-  └── layout.css: section spacing, grid, responsive breakpoints
-  └── components.css: cards, badges, table, buttons
-
-Step 4: Teaser animation
-  └── animations.css: @keyframes for progress bar, counter
-  └── animations.js: time counter, Intersection Observer for triggering
-
-Step 5: Section-by-section content
-  └── Drop in real figures as they become available
-  └── Replace placeholders with <picture> elements
-  └── Each section independently testable
-
-Step 6: Polish + deploy
-  └── Responsive testing
-  └── Performance audit (Lighthouse)
-  └── Final deploy to GitHub Pages
-```
-
-### Key Decisions
-
-| Decision | Choice | Rationale |
-|----------|--------|-----------|
-| Build system | None (static) | Simplicity, GitHub Pages, no deps to rot |
-| CSS framework | Bulma (keep) | Already there, good grid, light |
-| JS framework | None (vanilla) | Only need Observer + small utils |
-| Animations | CSS + MP4 hybrid | CSS for simple, video for complex pipeline |
-| Image format | WebP primary, PNG fallback | Best size/quality, universal support |
-| Font | Inter (keep) | Clean, academic, already loaded |
-
----
-
 ## Implementation Phases
 
 ### Phase 1: Content & Structure ← START HERE
@@ -302,9 +178,8 @@ Step 6: Polish + deploy
 ---
 
 ## Technical Notes
-- Framework: Static HTML + Bulma CSS + vanilla JS
-- No build step — just serve static files (GitHub Pages)
-- Animations: CSS @keyframes + Intersection Observer + MP4 for complex ones
-- Images: WebP with PNG fallback, lazy loading below fold
-- All animations respect `prefers-reduced-motion`
-- Site fully functional without JavaScript (progressive enhancement)
+- Framework: Static HTML + Bulma CSS + vanilla JS (from template)
+- No build step needed — just serve static files
+- Animations: prefer CSS + Intersection Observer (lightweight, no dependencies)
+- Images: use WebP with PNG fallback for quality + size
+- Videos: MP4 (H.264) for compatibility

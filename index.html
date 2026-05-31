@@ -51,30 +51,7 @@
 </head>
 <body>
 
-  <!-- Font Switcher (dev tool — remove before deploy) -->
-  <div class="font-switcher">
-    <label class="font-switcher__label">Font:</label>
-    <select id="fontSelect" onchange="switchFont(this.value)">
-      <optgroup label="Google Fonts">
-        <option value="'Inter'">Inter</option>
-        <option value="'Source Sans 3'">Source Sans 3</option>
-        <option value="'DM Sans'">DM Sans</option>
-        <option value="'Plus Jakarta Sans'">Plus Jakarta Sans</option>
-        <option value="'Outfit'">Outfit</option>
-        <option value="'Manrope'">Manrope</option>
-        <option value="'Lato'">Lato</option>
-      </optgroup>
-      <optgroup label="System Fonts (macOS)">
-        <option value="'Avenir'">Avenir</option>
-        <option value="'Avenir Next'">Avenir Next</option>
-        <option value="'Palatino'">Palatino</option>
-      </optgroup>
-      <optgroup label="Serif / Display">
-        <option value="'Linux Libertine O'">Linux Libertine O</option>
-        <option value="'Linux Biolinum O'">Linux Biolinum O</option>
-      </optgroup>
-    </select>
-  </div>
+
 
   <!-- Scroll to Top -->
   <button class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top">
@@ -94,8 +71,11 @@
             </div>
 
             <h1 class="title is-1 publication-title">
-              Efficient and Training-Free<br>Single-Image Diffusion Models
+              <span class="title-word"><span class="title-acronym">E</span>fficient</span> and Training-Free<br><span class="title-word"><span class="title-acronym">S</span>ingle</span>-<span class="title-word"><span class="title-acronym">I</span>mage</span> <span class="title-word"><span class="title-acronym">D</span>iffusion</span> Models
             </h1>
+            <div class="acronym-reveal" id="acronymReveal">
+              <span class="acronym-text"><span class="acronym-char">efficient</span>-<span class="acronym-char">SID</span></span>
+            </div>
 
             <div class="is-size-5 publication-authors">
               <span class="author-block"><a href="https://haojunqiu.github.io/" target="_blank">Haojun Qiu</a>,</span>
@@ -121,9 +101,15 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <a class="external-link button is-normal is-rounded is-light is-disabled" aria-disabled="true">
                   <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
+                  <span>Code (coming soon)</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-light is-disabled" aria-disabled="true">
+                  <span class="icon"><i class="fas fa-rocket"></i></span>
+                  <span>Demo (coming soon)</span>
                 </a>
               </span>
             </div>
@@ -141,50 +127,100 @@
       <div class="hero-body">
 
         <div class="teaser-comparison">
-          <!-- Trained methods card -->
-          <div class="teaser-card teaser-card--trained">
+          <!-- Trained methods card (SinDDM) -->
+          <div class="teaser-card teaser-card--trained" id="sinddmCard">
             <div class="teaser-card__header">
-              <span class="teaser-card__label">Trained Methods (SinDDM)</span>
+              <span class="teaser-card__label">SinDDM <span class="res-badge res-badge--low">250×250</span></span>
             </div>
             <div class="teaser-card__content">
-              <div class="training-progress">
-                <div class="training-progress__bar">
-                  <div class="training-progress__fill"></div>
+              <!-- Input selector -->
+              <div class="sinddm-inputs">
+                <span class="sinddm-inputs__label">Input (select one):</span>
+                <div class="sinddm-inputs__grid">
+                  <div class="sinddm-input-thumb active" data-input="0" style="background: #d4a574;"></div>
+                  <div class="sinddm-input-thumb" data-input="1" style="background: #a5c4d4;"></div>
+                  <div class="sinddm-input-thumb" data-input="2" style="background: #c4a5d4;"></div>
                 </div>
-                <div class="training-progress__time">Training... <span class="time-counter">0:00:00</span></div>
               </div>
-              <div class="placeholder-grid">
-                <div class="placeholder-item"></div>
-                <div class="placeholder-item"></div>
-                <div class="placeholder-item"></div>
+              <!-- Training phase (visible initially) -->
+              <div class="sinddm-training" id="sinddmTraining">
+                <div class="training-progress">
+                  <div class="training-progress__bar">
+                  <div class="training-progress__fill" id="sinddmProgressFill"></div>
+                </div>
+                <span class="training-progress__pct" id="sinddmPct">0.0000%</span>
+                <div class="training-progress__time">
+                    Training... <span class="time-counter" id="sinddmClock">0:00:00</span>
+                    <span class="time-remaining" id="sinddmRemaining">~8h 0m remaining</span>
+                  </div>
+                </div>
+                <div class="placeholder-grid placeholder-grid--locked">
+                  <div class="placeholder-item"></div>
+                  <div class="placeholder-item"></div>
+                  <div class="placeholder-item"></div>
+                </div>
+                <p class="waiting-text">Waiting for training to finish...</p>
+                <button class="skip-training-btn" id="skipTrainingBtn" style="display:none;">⏩ Skip training</button>
               </div>
-              <p class="waiting-text">Waiting for training to finish...</p>
+              <!-- Results phase (hidden initially) -->
+              <div class="sinddm-results hidden" id="sinddmResults">
+                <div class="sinddm-results__grid">
+                  <div class="sinddm-result-item" style="background: #d4a574;"></div>
+                  <div class="sinddm-result-item" style="background: #a5c4d4;"></div>
+                  <div class="sinddm-result-item" style="background: #c4a5d4;"></div>
+                </div>
+                <p class="sinddm-done-text">Done! 3 samples at 250×250</p>
+              </div>
             </div>
             <div class="teaser-card__footer">
-              <span class="stat">~10 hours training</span>
-              <span class="stat">18.5s inference</span>
+              <span class="stat">~8h training</span>
+              <span class="stat">1.6s inference</span>
+              <span class="stat">250×250 max</span>
             </div>
           </div>
 
           <div class="teaser-vs">vs</div>
 
           <!-- Ours card -->
-          <div class="teaser-card teaser-card--ours">
+          <div class="teaser-card teaser-card--ours" id="oursCard">
             <div class="teaser-card__header">
-              <span class="teaser-card__label">Ours (Training-Free)</span>
+              <span class="teaser-card__label">Ours (Training-Free) <span class="res-badge res-badge--high">Megapixel+</span></span>
               <span class="teaser-card__badge">✓ Ready</span>
             </div>
             <div class="teaser-card__content">
-              <div class="placeholder-grid placeholder-grid--active">
-                <div class="placeholder-item placeholder-item--result"></div>
-                <div class="placeholder-item placeholder-item--result"></div>
-                <div class="placeholder-item placeholder-item--result"></div>
+              <!-- Input selector -->
+              <div class="ours-inputs">
+                <span class="ours-inputs__label">Input (select one):</span>
+                <div class="ours-inputs__grid">
+                  <div class="ours-input-thumb active" data-input="0" style="background: #8fbc8f;"></div>
+                  <div class="ours-input-thumb" data-input="1" style="background: #6b9e9e;"></div>
+                  <div class="ours-input-thumb" data-input="2" style="background: #9e8f6b;"></div>
+                </div>
               </div>
-              <p class="ready-text">Diverse results in &lt;1 second</p>
+              <!-- Slideshow outputs -->
+              <div class="ours-slideshow" id="oursSlideshow">
+                <span class="ours-slideshow__label">Generated (<span id="oursFrameCounter">1</span>/20)</span>
+                <div class="ours-slideshow__grid">
+                  <div class="ours-slide-item" id="oursSlide0" style="background: #6b8e6b;"></div>
+                  <div class="ours-slide-item" id="oursSlide1" style="background: #7a9e7a;"></div>
+                  <div class="ours-slide-item" id="oursSlide2" style="background: #5c7e5c;"></div>
+                </div>
+              </div>
+              <!-- Megapixel upgrade -->
+              <div class="ours-megapixel hidden" id="oursMegapixel">
+                <span class="ours-megapixel__label">🔍 Megapixel output</span>
+                <div class="ours-megapixel__img" style="background: linear-gradient(135deg, #6b8e6b, #3d6b3d);"></div>
+                <div class="ours-megapixel__crop">
+                  <span>Detail crop (4× zoom)</span>
+                  <div class="ours-megapixel__crop-img" style="background: linear-gradient(45deg, #4a7a4a, #2d5a2d);"></div>
+                </div>
+              </div>
+              <p class="ready-text">Diverse results — no training needed</p>
             </div>
             <div class="teaser-card__footer">
               <span class="stat stat--highlight">0s training</span>
               <span class="stat stat--highlight">&lt;1s inference</span>
+              <span class="stat stat--highlight">Megapixel+</span>
             </div>
           </div>
         </div>
@@ -221,7 +257,7 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Why Single-Image Generation Still Matters</h2>
+          <h2 class="title is-3">Why Single-Image Generative Models (Still) Matter?</h2>
         </div>
       </div>
       <div class="columns is-centered">

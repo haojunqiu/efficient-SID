@@ -77,6 +77,15 @@
   margin-right: 0.25rem;
 }
 
+.publication-links .button.is-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  background: #e5e7eb;
+  border-color: #d1d5db;
+  color: #6b7280;
+}
+
 /* Section titles */
 .title.is-3 {
   font-weight: 700 !important;
@@ -278,37 +287,7 @@ code {
   visibility: visible;
 }
 
-/* Font Switcher (dev tool) */
-.font-switcher {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 9999;
-  background: var(--bg-primary);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 0.5rem 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  box-shadow: var(--shadow-lg);
-  font-size: 0.8rem;
-}
 
-.font-switcher__label {
-  font-weight: 600;
-  color: var(--text-secondary);
-}
-
-.font-switcher select {
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  padding: 0.3rem 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  background: var(--bg-secondary);
-}
 
 /* Footer */
 .footer {
