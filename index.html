@@ -130,16 +130,16 @@
           <!-- Trained methods card (SinDDM) -->
           <div class="teaser-card teaser-card--trained" id="sinddmCard">
             <div class="teaser-card__header">
-              <span class="teaser-card__label">SinDDM <span class="res-badge res-badge--low">250×250</span></span>
+              <span class="teaser-card__label">SinDDM <span class="res-badge res-badge--low">258×193 px</span></span>
             </div>
             <div class="teaser-card__content">
               <!-- Input selector -->
               <div class="sinddm-inputs">
                 <span class="sinddm-inputs__label">Input (select one):</span>
                 <div class="sinddm-inputs__grid">
-                  <div class="sinddm-input-thumb active" data-input="0" style="background: #d4a574;"></div>
-                  <div class="sinddm-input-thumb" data-input="1" style="background: #a5c4d4;"></div>
-                  <div class="sinddm-input-thumb" data-input="2" style="background: #c4a5d4;"></div>
+                  <div class="sinddm-input-thumb active" data-input="0"><img src="static/images/teaser/sinddm/inputs/aqueduct.png" alt="Aqueduct"></div>
+                  <div class="sinddm-input-thumb" data-input="1"><img src="static/images/teaser/sinddm/inputs/balloons.png" alt="Balloons"></div>
+                  <div class="sinddm-input-thumb" data-input="2"><img src="static/images/teaser/sinddm/inputs/marinabaysands.png" alt="Marina Bay Sands"></div>
                 </div>
               </div>
               <!-- Training phase (visible initially) -->
@@ -165,17 +165,16 @@
               <!-- Results phase (hidden initially) -->
               <div class="sinddm-results hidden" id="sinddmResults">
                 <div class="sinddm-results__grid">
-                  <div class="sinddm-result-item" style="background: #d4a574;"></div>
-                  <div class="sinddm-result-item" style="background: #a5c4d4;"></div>
-                  <div class="sinddm-result-item" style="background: #c4a5d4;"></div>
+                  <img class="sinddm-result-item" id="sinddmResult0" src="" alt="Result 1">
+                  <img class="sinddm-result-item" id="sinddmResult1" src="" alt="Result 2">
+                  <img class="sinddm-result-item" id="sinddmResult2" src="" alt="Result 3">
                 </div>
-                <p class="sinddm-done-text">Done! 3 samples at 250×250</p>
+                <p class="sinddm-done-text">Done! 3 samples at 258×193 px</p>
               </div>
             </div>
             <div class="teaser-card__footer">
               <span class="stat">~8h training</span>
               <span class="stat">1.6s inference</span>
-              <span class="stat">250×250 max</span>
             </div>
           </div>
 
@@ -184,36 +183,30 @@
           <!-- Ours card -->
           <div class="teaser-card teaser-card--ours" id="oursCard">
             <div class="teaser-card__header">
-              <span class="teaser-card__label">Ours (Training-Free) <span class="res-badge res-badge--high">Megapixel+</span></span>
+              <span class="teaser-card__label">Ours (Training-Free) <span class="res-badge res-badge--high" id="oursResBadge">1600×608 px</span></span>
               <span class="teaser-card__badge">✓ Ready</span>
             </div>
             <div class="teaser-card__content">
               <!-- Input selector -->
               <div class="ours-inputs">
-                <span class="ours-inputs__label">Input (select one):</span>
+                <span class="ours-inputs__label">Input:</span>
                 <div class="ours-inputs__grid">
-                  <div class="ours-input-thumb active" data-input="0" style="background: #8fbc8f;"></div>
-                  <div class="ours-input-thumb" data-input="1" style="background: #6b9e9e;"></div>
-                  <div class="ours-input-thumb" data-input="2" style="background: #9e8f6b;"></div>
+                  <div class="ours-input-thumb active" data-input="0"><img src="static/images/teaser/ours/yosemite/input.png" alt="Yosemite"></div>
                 </div>
               </div>
               <!-- Slideshow outputs -->
               <div class="ours-slideshow" id="oursSlideshow">
-                <span class="ours-slideshow__label">Generated (<span id="oursFrameCounter">1</span>/20)</span>
+                <span class="ours-slideshow__label">Generated (<span id="oursFrameCounter">1</span>/14)</span>
                 <div class="ours-slideshow__grid">
-                  <div class="ours-slide-item" id="oursSlide0" style="background: #6b8e6b;"></div>
-                  <div class="ours-slide-item" id="oursSlide1" style="background: #7a9e7a;"></div>
-                  <div class="ours-slide-item" id="oursSlide2" style="background: #5c7e5c;"></div>
+                  <img class="ours-slide-item" id="oursSlide0" src="static/images/teaser/ours/yosemite/2.png" alt="Generated 1">
+                  <img class="ours-slide-item" id="oursSlide1" src="static/images/teaser/ours/yosemite/3.png" alt="Generated 2">
+                  <img class="ours-slide-item" id="oursSlide2" src="static/images/teaser/ours/yosemite/4.png" alt="Generated 3">
                 </div>
               </div>
               <!-- Megapixel upgrade -->
               <div class="ours-megapixel hidden" id="oursMegapixel">
-                <span class="ours-megapixel__label">🔍 Megapixel output</span>
-                <div class="ours-megapixel__img" style="background: linear-gradient(135deg, #6b8e6b, #3d6b3d);"></div>
-                <div class="ours-megapixel__crop">
-                  <span>Detail crop (4× zoom)</span>
-                  <div class="ours-megapixel__crop-img" style="background: linear-gradient(45deg, #4a7a4a, #2d5a2d);"></div>
-                </div>
+                <span class="ours-megapixel__label">🔍 Megapixel output (1600×608)</span>
+                <img class="ours-megapixel__img" id="oursMegapixelImg" src="" alt="Megapixel output">
               </div>
               <p class="ready-text">Diverse results — no training needed</p>
             </div>

@@ -64,6 +64,40 @@ document.addEventListener('DOMContentLoaded', function() {
   const sinddmTraining = document.getElementById('sinddmTraining');
   const sinddmResults = document.getElementById('sinddmResults');
 
+  // SinDDM result image config
+  const sinddmInputNames = ['aqueduct', 'balloons', 'marinabaysands'];
+  const sinddmResolutions = ['258×193', '248×186', '273×182'];
+  const sinddmResultIds = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45];
+  let currentSinddmInput = 0;
+
+  // Resolution badge & done-text elements
+  const sinddmResBadge = document.querySelector('.res-badge--low');
+  const sinddmDoneText = document.querySelector('.sinddm-done-text');
+
+  function updateSinddmResolution(idx) {
+    var res = sinddmResolutions[idx];
+    if (sinddmResBadge) sinddmResBadge.textContent = res + ' px';
+    if (sinddmDoneText) sinddmDoneText.textContent = 'Done! 3 samples at ' + res + ' px';
+  }
+
+  function getSinddmResultImages(inputIdx) {
+    var name = sinddmInputNames[inputIdx];
+    // Pick 3 random distinct indices from available results
+    var shuffled = sinddmResultIds.slice().sort(function() { return Math.random() - 0.5; });
+    var picked = shuffled.slice(0, 3);
+    return picked.map(function(id) {
+      return 'static/images/teaser/sinddm/results/' + name + '/' + id + '.png';
+    });
+  }
+
+  function populateSinddmResults() {
+    var imgs = getSinddmResultImages(currentSinddmInput);
+    for (var i = 0; i < 3; i++) {
+      var el = document.getElementById('sinddmResult' + i);
+      if (el) el.src = imgs[i];
+    }
+  }
+
   if (sinddmClock) {
     const TOTAL_TRAINING_SECONDS = 8 * 3600; // 8 hours
     let elapsed = 0;
@@ -138,6 +172,7 @@ document.addEventListener('DOMContentLoaded', function() {
       skipBtn.classList.remove('visible');
       // After 1.6s (real inference time), show results
       setTimeout(function() {
+        populateSinddmResults();
         sinddmTraining.classList.add('hidden');
         sinddmResults.classList.remove('hidden');
       }, 1600);
@@ -149,6 +184,8 @@ document.addEventListener('DOMContentLoaded', function() {
       thumb.addEventListener('click', function() {
         inputThumbs.forEach(function(t) { t.classList.remove('active'); });
         thumb.classList.add('active');
+        currentSinddmInput = parseInt(thumb.getAttribute('data-input'));
+        updateSinddmResolution(currentSinddmInput);
         startTraining();
       });
     });
@@ -163,36 +200,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const frameCounter = document.getElementById('oursFrameCounter');
 
   if (oursSlideshow) {
-    // Placeholder colors per input (will be replaced with real images)
-    const colorSets = {
-      0: [
-        ['#6b8e6b', '#7a9e7a', '#5c7e5c'],
-        ['#8fbc8f', '#6b9e6b', '#4a8a4a'],
-        ['#5f9f5f', '#7ab87a', '#3d8d3d'],
-        ['#4caf4c', '#66bb66', '#339933'],
-        ['#2e8b2e', '#5ca85c', '#1a751a'],
-      ],
-      1: [
-        ['#6b9e9e', '#7aaeae', '#5c8e8e'],
-        ['#8fcfcf', '#6baeae', '#4a9a9a'],
-        ['#5fafaf', '#7ac8c8', '#3d9d9d'],
-        ['#4cbfbf', '#66cbcb', '#339a9a'],
-        ['#2e9b9b', '#5cb8b8', '#1a8585'],
-      ],
-      2: [
-        ['#9e8f6b', '#ae9e7a', '#8e7e5c'],
-        ['#cfbc8f', '#ae9e6b', '#9a8a4a'],
-        ['#af9f5f', '#c8b87a', '#9d8d3d'],
-        ['#bfaf4c', '#cbbb66', '#9a9933'],
-        ['#9b8b2e', '#b8a85c', '#85751a'],
-      ],
+    // Image sets per input: each entry maps to a folder with numbered PNGs
+    const oursImageSets = {
+      0: { path: 'static/images/teaser/ours/yosemite/', ids: [2,3,4,5,6,7,8,9,10,11,12,13,14,15], total: 14, res: '1600×608' }
     };
+    const oursResBadge = document.getElementById('oursResBadge');
     let currentOursInput = 0;
-    let slideColors = colorSets[0];
+    let currentSet = oursImageSets[0];
     let slideIdx = 0;
     let megapixelShown = false;
-    const CYCLE_INTERVAL = 1000; // 1 FPS
-    const MEGAPIXEL_AFTER = 5; // show megapixel after 5 frames
+    const CYCLE_INTERVAL = 1500; // 1.5s per frame for better viewing
+    const MEGAPIXEL_AFTER = 7; // show megapixel after 7 frames
     const MEGAPIXEL_DURATION = 4000; // show megapixel for 4s
 
     const slideItems = [
@@ -200,20 +218,28 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('oursSlide1'),
       document.getElementById('oursSlide2'),
     ];
+    const megapixelImg = document.getElementById('oursMegapixelImg');
+
+    function getOursImageUrl(idx) {
+      var set = oursImageSets[currentOursInput];
+      var imgId = set.ids[idx % set.ids.length];
+      return set.path + imgId + '.png';
+    }
 
     function cycleSlides() {
-      slideIdx = (slideIdx + 1) % 20;
-      const colorSet = slideColors[slideIdx % slideColors.length];
+      slideIdx = (slideIdx + 1) % currentSet.total;
+      // Show 3 consecutive images starting from slideIdx
       slideItems.forEach(function(item, i) {
         if (item) {
           item.style.opacity = '0';
           setTimeout(function() {
-            item.style.background = colorSet[i];
+            var imgIdx = (slideIdx * 3 + i) % currentSet.ids.length;
+            item.src = getOursImageUrl(imgIdx);
             item.style.opacity = '1';
           }, 150);
         }
       });
-      if (frameCounter) frameCounter.textContent = slideIdx + 1;
+      if (frameCounter) frameCounter.textContent = (slideIdx + 1);
 
       // Show megapixel upgrade after N frames
       if (slideIdx === MEGAPIXEL_AFTER && !megapixelShown) {
@@ -221,6 +247,11 @@ document.addEventListener('DOMContentLoaded', function() {
         oursSlideshow.classList.add('hidden');
         oursMegapixel.classList.remove('hidden');
         oursMegapixel.classList.add('megapixel-enter');
+        // Pick a random image for megapixel showcase
+        if (megapixelImg) {
+          var randIdx = Math.floor(Math.random() * currentSet.ids.length);
+          megapixelImg.src = getOursImageUrl(randIdx);
+        }
         // Return to slideshow after duration
         setTimeout(function() {
           oursMegapixel.classList.remove('megapixel-enter');
@@ -240,9 +271,15 @@ document.addEventListener('DOMContentLoaded', function() {
         oursInputThumbs.forEach(function(t) { t.classList.remove('active'); });
         thumb.classList.add('active');
         currentOursInput = parseInt(thumb.dataset.input);
-        slideColors = colorSets[currentOursInput];
+        currentSet = oursImageSets[currentOursInput];
         slideIdx = 0;
+        megapixelShown = false;
         if (frameCounter) frameCounter.textContent = '1';
+        if (oursResBadge) oursResBadge.textContent = currentSet.res + ' px';
+        // Update slides immediately
+        slideItems.forEach(function(item, i) {
+          if (item) item.src = getOursImageUrl(i);
+        });
       });
     });
   }
