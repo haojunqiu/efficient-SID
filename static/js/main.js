@@ -211,10 +211,8 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentOursInput = 0;
     let currentSet = oursImageSets[0];
     let slideIdx = 0;
-    let megapixelShown = false;
+    let generatedCount = 1; // how many images have been generated so far
     const CYCLE_INTERVAL = 1500; // 1.5s per frame for better viewing
-    const MEGAPIXEL_AFTER = 7; // show megapixel after 7 frames
-    const MEGAPIXEL_DURATION = 4000; // show megapixel for 4s
 
     const slideItems = [
       document.getElementById('oursSlide0'),
@@ -229,39 +227,56 @@ document.addEventListener('DOMContentLoaded', function() {
       return set.path + imgId + '.png';
     }
 
-    function cycleSlides() {
-      slideIdx = (slideIdx + 1) % currentSet.total;
-      // Show 3 consecutive images starting from slideIdx
+    // Update visibility and highlight state of slide items
+    function updateSlideStates() {
+      var visibleCount = Math.min(generatedCount, 3);
       slideItems.forEach(function(item, i) {
-        if (item) {
-          item.style.opacity = '0';
-          setTimeout(function() {
-            var imgIdx = (slideIdx * 3 + i) % currentSet.ids.length;
-            item.src = getOursImageUrl(imgIdx);
-            item.style.opacity = '1';
-          }, 150);
+        if (!item) return;
+        if (i < visibleCount) {
+          item.classList.remove('ours-slide-hidden');
+        } else {
+          item.classList.add('ours-slide-hidden');
+        }
+        // The last visible item (newest) gets the 'current' highlight
+        if (i === visibleCount - 1) {
+          item.classList.add('ours-slide-current');
+        } else {
+          item.classList.remove('ours-slide-current');
         }
       });
+    }
+
+    function cycleSlides() {
+      slideIdx = (slideIdx + 1) % currentSet.total;
+      generatedCount = Math.min(generatedCount + 1, currentSet.total);
+      var visibleCount = Math.min(generatedCount, 3);
+
+      // Build the buffer: show last `visibleCount` generated images
+      // The newest is at position visibleCount-1
+      slideItems.forEach(function(item, i) {
+        if (!item) return;
+        if (i < visibleCount) {
+          item.style.opacity = '0';
+          (function(el, idx) {
+            setTimeout(function() {
+              // Buffer: slot 0 = oldest of the 3, slot visibleCount-1 = newest
+              var imgIdx = slideIdx - (visibleCount - 1 - idx);
+              if (imgIdx < 0) imgIdx += currentSet.ids.length;
+              el.src = getOursImageUrl(imgIdx % currentSet.ids.length);
+              el.style.opacity = '1';
+            }, 150);
+          })(item, i);
+        } else {
+          item.style.opacity = ''; // let CSS class control hidden items
+        }
+      });
+
+      updateSlideStates();
       if (frameCounter) frameCounter.textContent = (slideIdx + 1);
 
-      // Show megapixel upgrade after N frames
-      if (slideIdx === MEGAPIXEL_AFTER && !megapixelShown) {
-        megapixelShown = true;
-        oursSlideshow.classList.add('hidden');
-        oursMegapixel.classList.remove('hidden');
-        oursMegapixel.classList.add('megapixel-enter');
-        // Pick a random image for megapixel showcase
-        if (megapixelImg) {
-          var randIdx = Math.floor(Math.random() * currentSet.ids.length);
-          megapixelImg.src = getOursImageUrl(randIdx);
-        }
-        // Return to slideshow after duration
-        setTimeout(function() {
-          oursMegapixel.classList.remove('megapixel-enter');
-          oursMegapixel.classList.add('hidden');
-          oursSlideshow.classList.remove('hidden');
-          megapixelShown = false;
-        }, MEGAPIXEL_DURATION);
+      // Update the megapixel zoom to show the current (newest) image
+      if (megapixelImg) {
+        megapixelImg.src = getOursImageUrl(slideIdx % currentSet.ids.length);
       }
     }
 
@@ -276,13 +291,19 @@ document.addEventListener('DOMContentLoaded', function() {
         currentOursInput = parseInt(thumb.dataset.input);
         currentSet = oursImageSets[currentOursInput];
         slideIdx = 0;
-        megapixelShown = false;
+        generatedCount = 1; // reset to progressive reveal
         if (frameCounter) frameCounter.textContent = '1';
         if (oursResBadge) oursResBadge.textContent = currentSet.res + ' px';
-        // Update slides immediately
+        // Show only first image
         slideItems.forEach(function(item, i) {
-          if (item) item.src = getOursImageUrl(i);
+          if (item) {
+            item.src = getOursImageUrl(0);
+            item.style.opacity = ''; // clear inline opacity so CSS class takes effect
+          }
         });
+        updateSlideStates();
+        // Update megapixel zoom
+        if (megapixelImg) megapixelImg.src = getOursImageUrl(0);
       });
     });
   }
