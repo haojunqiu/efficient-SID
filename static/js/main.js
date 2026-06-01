@@ -202,7 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (oursSlideshow) {
     // Image sets per input: each entry maps to a folder with numbered PNGs
     const oursImageSets = {
-      0: { path: 'static/images/teaser/ours/yosemite/', ids: [2,3,4,5,6,7,8,9,10,11,12,13,14,15], total: 14, res: '1600×608' }
+      0: { path: 'static/images/teaser/ours/yosemite/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1600×608' },
+      1: { path: 'static/images/teaser/ours/moon/', ids: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21], total: 20, res: '1216×816' },
+      2: { path: 'static/images/teaser/ours/succulent/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' },
+      3: { path: 'static/images/teaser/ours/terrace/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' }
     };
     const oursResBadge = document.getElementById('oursResBadge');
     let currentOursInput = 0;
