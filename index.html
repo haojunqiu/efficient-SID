@@ -260,13 +260,13 @@
         <div class="column is-four-fifths">
           <div class="content has-text-justified">
             <p>
-              Large models condition on a reference image through cross-attention — they <em>see</em> it. But seeing is not sampling. The model still generates through its internet-scale prior. It knows what "mosaic" means generically, but it cannot reproduce <em>this specific</em> mosaic's tiles, grout lines, and palette.
+              There are multiple reasons why single-image generative modeling is useful. In particular, <strong>learning a prior over image patches imposes strong constraints on the content of a generated image.</strong>
             </p>
             <p>
-              Our method samples directly from the patch distribution of the reference image. The output is literally composed of patches from the input — every texture, every pattern, traceable back to the source.
+              For example, consider the task of generating an image that combines the style of one image with the structure of another. Existing large models such as GPT Image 2 or Nano Banana, conditioned on these input images and prompt instructions, fill in content drawn from their internet-scale training data, so the resulting patch statistics deviate from those of the input images. In contrast, single-image models constrain the output to contain exactly the patches present in the input images, so the style and structure of the result stay closely aligned with their respective inputs.
             </p>
             <p>
-              Any time your "dataset" is a single observation — a Mars rover panorama, a hyperspectral satellite scan, a rare histology slide, or a unique painted canvas — the whole internet is the wrong prior. <strong>The right prior is the patches of the image in front of you.</strong>
+              This kind of constraint could be valuable in other applications where data is scarce. Moreover, single-image modeling provides <strong>clear provenance over the content of the generated image</strong>.
             </p>
           </div>
 
