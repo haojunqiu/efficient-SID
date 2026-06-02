@@ -260,13 +260,10 @@
         <div class="column is-four-fifths">
           <div class="content has-text-justified">
             <p>
-              There are multiple reasons why single-image generative modeling is useful. In particular, <strong>learning a prior over image patches imposes strong constraints on the content of a generated image.</strong>
+              There are multiple reasons why single-image generative modeling is useful. In particular, learning a prior over image patches <strong>imposes strong constraints on the content of a generated image</strong>. Consider combining the style of one image with the structure of another: large models like GPT Image 2 or Nano Banana fill in content drawn from internet-scale training data, so the resulting patch statistics deviate from those of the input images. In contrast, single-image models constrain the output to contain exactly the patches present in the inputs, keeping style and structure closely aligned.
             </p>
             <p>
-              For example, consider the task of generating an image that combines the style of one image with the structure of another. Existing large models such as GPT Image 2 or Nano Banana, conditioned on these input images and prompt instructions, fill in content drawn from their internet-scale training data, so the resulting patch statistics deviate from those of the input images. In contrast, single-image models constrain the output to contain exactly the patches present in the input images, so the style and structure of the result stay closely aligned with their respective inputs.
-            </p>
-            <p>
-              This kind of constraint could be valuable in other applications where data is scarce. Moreover, single-image modeling provides <strong>clear provenance over the content of the generated image</strong>.
+              This kind of constraint is valuable in applications where data is scarce. Moreover, single-image modeling provides <strong>clear provenance over the content of the generated image</strong>.
             </p>
           </div>
 
@@ -317,10 +314,11 @@
             </p>
           </div>
 
-          <!-- Placeholder: insight figure -->
-          <div class="figure-placeholder">
-            <i class="fas fa-image"></i>
-            [Figure: ImageNet (N huge, D huge) → ✗ intractable &nbsp;|&nbsp; Single-image patches (N small, D small) → ✓ fast &amp; exact]
+          <!-- Insight figure: closed-form denoiser contrast -->
+          <div class="motivation-figure">
+            <div class="motivation-figure__static">
+              <img src="static/images/method/cfd_contrast.png" alt="Closed-form denoiser: ImageNet intractable vs single-image patches tractable" loading="lazy">
+            </div>
           </div>
 
           <!-- Pipeline -->
