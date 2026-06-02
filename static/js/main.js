@@ -284,6 +284,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Input selector for ours card
     const oursInputThumbs = document.querySelectorAll('.ours-input-thumb');
+    const oursInputPreview = document.getElementById('oursInputPreview');
+    const inputPaths = ['static/images/teaser/ours/yosemite/input.png', 'static/images/teaser/ours/moon/input.png', 'static/images/teaser/ours/succulent/input.png', 'static/images/teaser/ours/terrace/input.png'];
     oursInputThumbs.forEach(function(thumb) {
       thumb.addEventListener('click', function() {
         oursInputThumbs.forEach(function(t) { t.classList.remove('active'); });
@@ -294,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function() {
         generatedCount = 1; // reset to progressive reveal
         if (frameCounter) frameCounter.textContent = '1';
         if (oursResBadge) oursResBadge.textContent = currentSet.res + ' px';
+        if (oursInputPreview) oursInputPreview.src = inputPaths[currentOursInput];
         // Show only first image
         slideItems.forEach(function(item, i) {
           if (item) {
@@ -302,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         });
         updateSlideStates();
-        // Update megapixel zoom
+        // Update full-res preview
         if (megapixelImg) megapixelImg.src = getOursImageUrl(0);
       });
     });
