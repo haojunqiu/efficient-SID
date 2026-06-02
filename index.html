@@ -741,9 +741,51 @@
         <p class="app-description">
           Given a structure image and a style image, we transfer the patch distribution of the style onto the spatial layout of the structure — without any text prompt or neural style-transfer network.
         </p>
-        <div class="figure-placeholder">
-          <i class="fas fa-images"></i>
-          [Structural analogy results — images TBD]
+
+        <!-- Example 1: Mosaic + S letter -->
+        <div class="analogy-example">
+          <div class="analogy-row">
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/mosaic_style.png" alt="Style: mosaic">
+              <span class="analogy-label">Style</span>
+            </div>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/s_letter_structure.png" alt="Structure: S letter">
+              <span class="analogy-label">Structure</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/mosaic_s_proposed.png" alt="Ours">
+              <span class="analogy-label">Ours</span>
+            </div>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/mosaic_s_nanobanana.png" alt="Nano Banana">
+              <span class="analogy-label">Nano Banana</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: Desert + Tower -->
+        <div class="analogy-example">
+          <div class="analogy-row">
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/desert_style.png" alt="Style: desert">
+              <span class="analogy-label">Style</span>
+            </div>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/tower_structure.png" alt="Structure: tower">
+              <span class="analogy-label">Structure</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/desert_tower_proposed.png" alt="Ours">
+              <span class="analogy-label">Ours</span>
+            </div>
+            <div class="analogy-item">
+              <img src="static/images/results/structural_analogy/desert_tower_nanobanana.png" alt="Nano Banana">
+              <span class="analogy-label">Nano Banana</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -752,9 +794,167 @@
         <p class="app-description">
           By combining our patch-based denoiser with CLIP guidance, we enable text-driven style transfer that preserves the internal patch statistics of the input.
         </p>
-        <div class="figure-placeholder">
-          <i class="fas fa-images"></i>
-          [Text stylization results — images TBD]
+
+        <!-- Scene 1: Bagan -->
+        <div class="stylization-example">
+          <div class="stylization-input">
+            <img src="static/images/results/text_stylization/bagan_input.png" alt="Input: Bagan temples">
+            <span class="analogy-label">Input</span>
+          </div>
+          <div class="stylization-grid">
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Van Gogh"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_vangogh_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_vangogh_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Picasso"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_picasso_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_picasso_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Monet"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_monet_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_monet_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Cubism"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_cubism_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/bagan_cubism_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 2: Night Sky -->
+        <div class="stylization-example">
+          <div class="stylization-input">
+            <img src="static/images/results/text_stylization/night_sky_input.png" alt="Input: Night sky">
+            <span class="analogy-label">Input</span>
+          </div>
+          <div class="stylization-grid">
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Van Gogh"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_vangogh_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_vangogh_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Picasso"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_picasso_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_picasso_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Monet"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_monet_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_monet_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Cubism"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_cubism_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/night_sky_cubism_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Scene 3: Islands -->
+        <div class="stylization-example">
+          <div class="stylization-input">
+            <img src="static/images/results/text_stylization/islands_input.png" alt="Input: Islands">
+            <span class="analogy-label">Input</span>
+          </div>
+          <div class="stylization-grid">
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Van Gogh"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_vangogh_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_vangogh_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Picasso"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_picasso_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_picasso_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Monet"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_monet_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_monet_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+            <div class="stylization-row">
+              <span class="stylization-style-label">"Cubism"</span>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_cubism_sinddm.png" alt="SinDDM">
+                <span class="analogy-label">SinDDM</span>
+              </div>
+              <div class="stylization-pair">
+                <img src="static/images/results/text_stylization/islands_cubism_ours.png" alt="Ours">
+                <span class="analogy-label">Ours</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
