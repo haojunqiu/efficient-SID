@@ -352,3 +352,17 @@ function copyBibTeX() {
     }, 2000);
   });
 }
+
+/* ===== Application Tabs ===== */
+document.querySelectorAll('.app-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    // Deactivate all tabs and panels
+    document.querySelectorAll('.app-tab').forEach(function(t) { t.classList.remove('active'); });
+    document.querySelectorAll('.app-panel').forEach(function(p) { p.classList.remove('active'); });
+    // Activate clicked tab and corresponding panel
+    tab.classList.add('active');
+    var panelId = 'app-' + tab.getAttribute('data-app');
+    var panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+  });
+});

@@ -390,19 +390,219 @@
   </section>
 
 
-  <!-- ==================== RESULTS (TBD) ==================== -->
-  <section class="section section--alt reveal">
-    <div class="container is-max-desktop">
+  <!-- ==================== APPLICATIONS ==================== -->
+  <section class="section section--alt reveal" id="applications">
+    <div class="container is-max-widescreen">
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3">Results</h2>
-          <div class="figure-placeholder">
-            <i class="fas fa-images"></i>
-            [Results gallery — content and ordering TBD]<br>
-            <em>Unconditional generation · High-res · Stylization · Applications · Comparisons</em>
+          <h2 class="title is-3">Applications</h2>
+          <p class="subtitle is-5" style="margin-bottom: 2rem;">
+            Our patch-based diffusion framework naturally supports several downstream applications without any architectural changes.
+          </p>
+        </div>
+      </div>
+
+      <!-- Application Tabs -->
+      <div class="app-tabs">
+        <button class="app-tab active" data-app="retargeting">Retargeting</button>
+        <button class="app-tab" data-app="tiling">Tileable Generation</button>
+        <button class="app-tab" data-app="structural-analogy">Structural Analogy</button>
+        <button class="app-tab" data-app="text-stylization">Text Stylization</button>
+      </div>
+
+      <!-- ===== Retargeting ===== -->
+      <div class="app-panel active" id="app-retargeting">
+        <p class="app-description">
+          <strong>Retargeting is content-aware resizing:</strong> given a single input image, we generate new images at arbitrary target aspect ratios.
+          Naive resizing stretches and distorts objects (e.g., penguins become fat!). Our method instead synthesizes new content while preserving the natural proportions and patch statistics of the original.
+        </p>
+
+        <!-- Explainer: naive vs ours -->
+        <div class="retarget-explainer">
+          <div class="retarget-explainer-item">
+            <img src="static/images/results/retargeting/penguins-2_input.png" alt="Input">
+            <span class="retarget-explainer-label">Input</span>
+          </div>
+          <span class="retarget-arrow">→</span>
+          <div class="retarget-explainer-item retarget-explainer-bad">
+            <img src="static/images/results/retargeting/penguins-2_naive_2w.png" alt="Naive 2x width">
+            <span class="retarget-explainer-label">Naive resize (2× width) <span class="retarget-x">✗</span></span>
+          </div>
+          <span class="retarget-vs">vs.</span>
+          <div class="retarget-explainer-item retarget-explainer-good">
+            <img src="static/images/results/retargeting/penguins-2_2w_1h.png" alt="Ours 2x width">
+            <span class="retarget-explainer-label">Ours (2× width) <span class="retarget-check">✓</span></span>
+          </div>
+        </div>
+
+        <!-- Example 1: fruit -->
+        <div class="retarget-example">
+          <div class="retarget-grid">
+            <!-- Axis labels -->
+            <div class="retarget-axis-y">↑ height</div>
+            <div class="retarget-axis-x">width →</div>
+            <!-- Row 1: 2× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="2">
+              <img src="static/images/results/retargeting/fruit_0.5w_2h.png" alt="0.5w 2h">
+              <span class="retarget-cell-label">0.5×w, 2×h</span>
+            </div>
+            <div class="retarget-cell" data-col="1" data-row="2">
+              <img src="static/images/results/retargeting/fruit_1w_2h.png" alt="1w 2h">
+              <span class="retarget-cell-label">1×w, 2×h</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="2">
+              <img src="static/images/results/retargeting/fruit_2w_2h.png" alt="2w 2h">
+              <span class="retarget-cell-label">2×w, 2×h</span>
+            </div>
+            <!-- Row 2: 1× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="1">
+              <img src="static/images/results/retargeting/fruit_0.5w_1h.png" alt="0.5w 1h">
+              <span class="retarget-cell-label">0.5×w, 1×h</span>
+            </div>
+            <div class="retarget-cell retarget-cell-input" data-col="1" data-row="1">
+              <img src="static/images/results/retargeting/fruit_input.png" alt="Input">
+              <span class="retarget-cell-label">Input (1×, 1×)</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="1">
+              <img src="static/images/results/retargeting/fruit_2w_1h.png" alt="2w 1h">
+              <span class="retarget-cell-label">2×w, 1×h</span>
+            </div>
+            <!-- Row 3: 0.5× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="0.5">
+              <img src="static/images/results/retargeting/fruit_0.5w_0.5h.png" alt="0.5w 0.5h">
+              <span class="retarget-cell-label">0.5×w, 0.5×h</span>
+            </div>
+            <div class="retarget-cell" data-col="1" data-row="0.5">
+              <img src="static/images/results/retargeting/fruit_1w_0.5h.png" alt="1w 0.5h">
+              <span class="retarget-cell-label">1×w, 0.5×h</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="0.5">
+              <img src="static/images/results/retargeting/fruit_2w_0.5h.png" alt="2w 0.5h">
+              <span class="retarget-cell-label">2×w, 0.5×h</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: penguins -->
+        <div class="retarget-example">
+          <div class="retarget-grid">
+            <div class="retarget-axis-y">↑ height</div>
+            <div class="retarget-axis-x">width →</div>
+            <!-- Row 1: 2× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="2">
+              <img src="static/images/results/retargeting/penguins-2_0.5w_2h.png" alt="0.5w 2h">
+              <span class="retarget-cell-label">0.5×w, 2×h</span>
+            </div>
+            <div class="retarget-cell" data-col="1" data-row="2">
+              <img src="static/images/results/retargeting/penguins-2_1w_2h.png" alt="1w 2h">
+              <span class="retarget-cell-label">1×w, 2×h</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="2">
+              <img src="static/images/results/retargeting/penguins-2_2w_2h.png" alt="2w 2h">
+              <span class="retarget-cell-label">2×w, 2×h</span>
+            </div>
+            <!-- Row 2: 1× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="1">
+              <img src="static/images/results/retargeting/penguins-2_0.5w_1h.png" alt="0.5w 1h">
+              <span class="retarget-cell-label">0.5×w, 1×h</span>
+            </div>
+            <div class="retarget-cell retarget-cell-input" data-col="1" data-row="1">
+              <img src="static/images/results/retargeting/penguins-2_input.png" alt="Input">
+              <span class="retarget-cell-label">Input (1×, 1×)</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="1">
+              <img src="static/images/results/retargeting/penguins-2_2w_1h.png" alt="2w 1h">
+              <span class="retarget-cell-label">2×w, 1×h</span>
+            </div>
+            <!-- Row 3: 0.5× height -->
+            <div class="retarget-cell" data-col="0.5" data-row="0.5">
+              <img src="static/images/results/retargeting/penguins-2_0.5w_0.5h.png" alt="0.5w 0.5h">
+              <span class="retarget-cell-label">0.5×w, 0.5×h</span>
+            </div>
+            <div class="retarget-cell" data-col="1" data-row="0.5">
+              <img src="static/images/results/retargeting/penguins-2_1w_0.5h.png" alt="1w 0.5h">
+              <span class="retarget-cell-label">1×w, 0.5×h</span>
+            </div>
+            <div class="retarget-cell" data-col="2" data-row="0.5">
+              <img src="static/images/results/retargeting/penguins-2_2w_0.5h.png" alt="2w 0.5h">
+              <span class="retarget-cell-label">2×w, 0.5×h</span>
+            </div>
           </div>
         </div>
       </div>
+
+      <!-- ===== Tiling ===== -->
+      <div class="app-panel" id="app-tiling">
+        <p class="app-description">
+          We generate tileable images by enforcing boundary consistency during diffusion.
+          The output tiles seamlessly in both directions — demonstrated here as a 3×3 repetition.
+        </p>
+
+        <!-- Example 1: bricks -->
+        <div class="tiling-example">
+          <div class="tiling-row">
+            <div class="tiling-input-col">
+              <img src="static/images/results/tiling/chatgpt_bricks_input.png" alt="Input: bricks texture">
+              <span class="tiling-label">Input</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="tiling-input-col">
+              <img src="static/images/results/tiling/chatgpt_bricks_tile.png" alt="Tileable output">
+              <span class="tiling-label">Tileable output</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="tiling-grid-col">
+              <div class="tiling-grid" style="background-image: url('static/images/results/tiling/chatgpt_bricks_tile.png');">
+              </div>
+              <span class="tiling-label">3×3 tiled</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Example 2: crinkled paper -->
+        <div class="tiling-example">
+          <div class="tiling-row">
+            <div class="tiling-input-col">
+              <img src="static/images/results/tiling/chatgpt_crinkled_paper_input.png" alt="Input: crinkled paper">
+              <span class="tiling-label">Input</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="tiling-input-col">
+              <img src="static/images/results/tiling/chatgpt_crinkled_paper_tile.png" alt="Tileable output">
+              <span class="tiling-label">Tileable output</span>
+            </div>
+            <span class="retarget-arrow">→</span>
+            <div class="tiling-grid-col">
+              <div class="tiling-grid" style="background-image: url('static/images/results/tiling/chatgpt_crinkled_paper_tile.png');">
+              </div>
+              <span class="tiling-label">3×3 tiled</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== Structural Analogy ===== -->
+      <div class="app-panel" id="app-structural-analogy">
+        <p class="app-description">
+          Given a structure image and a style image, we transfer the patch distribution of the style onto the spatial layout of the structure — without any text prompt or neural style-transfer network.
+        </p>
+        <div class="figure-placeholder">
+          <i class="fas fa-images"></i>
+          [Structural analogy results — images TBD]
+        </div>
+      </div>
+
+      <!-- ===== Text Stylization ===== -->
+      <div class="app-panel" id="app-text-stylization">
+        <p class="app-description">
+          By combining our patch-based denoiser with CLIP guidance, we enable text-driven style transfer that preserves the internal patch statistics of the input.
+        </p>
+        <div class="figure-placeholder">
+          <i class="fas fa-images"></i>
+          [Text stylization results — images TBD]
+        </div>
+      </div>
+
     </div>
   </section>
 
