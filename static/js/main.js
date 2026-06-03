@@ -202,10 +202,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (oursSlideshow) {
     // Image sets per input: each entry maps to a folder with numbered PNGs
     const oursImageSets = {
-      0: { path: 'static/images/teaser/ours/yosemite/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1600×608' },
-      1: { path: 'static/images/teaser/ours/moon/', ids: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21], total: 20, res: '1216×816' },
-      2: { path: 'static/images/teaser/ours/succulent/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' },
-      3: { path: 'static/images/teaser/ours/terrace/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' }
+      0: { path: 'static/images/teaser/ours/succulent/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' },
+      1: { path: 'static/images/teaser/ours/yosemite/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1600×608' },
+      2: { path: 'static/images/teaser/ours/terrace/', ids: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], total: 20, res: '1216×816' },
+      3: { path: 'static/images/teaser/ours/moon/', ids: [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21], total: 20, res: '1216×816' }
     };
     const oursResBadge = document.getElementById('oursResBadge');
     let currentOursInput = 0;
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Input selector for ours card
     const oursInputThumbs = document.querySelectorAll('.ours-input-thumb');
     const oursInputPreview = document.getElementById('oursInputPreview');
-    const inputPaths = ['static/images/teaser/ours/yosemite/input.png', 'static/images/teaser/ours/moon/input.png', 'static/images/teaser/ours/succulent/input.png', 'static/images/teaser/ours/terrace/input.png'];
+    const inputPaths = ['static/images/teaser/ours/succulent/input.png', 'static/images/teaser/ours/yosemite/input.png', 'static/images/teaser/ours/terrace/input.png', 'static/images/teaser/ours/moon/input.png'];
     oursInputThumbs.forEach(function(thumb) {
       thumb.addEventListener('click', function() {
         oursInputThumbs.forEach(function(t) { t.classList.remove('active'); });
@@ -331,12 +331,65 @@ document.addEventListener('DOMContentLoaded', function() {
       motivStatic.classList.remove('hidden');
     });
   }
+
+  // ===== Method figure: static/video toggle =====
+  const playMethodBtn = document.getElementById('playMethodBtn');
+  const backMethodBtn = document.getElementById('backToMethodStaticBtn');
+  const methodStatic = document.getElementById('methodStatic');
+  const methodVideo = document.getElementById('methodVideo');
+  if (playMethodBtn && backMethodBtn) {
+    playMethodBtn.addEventListener('click', function() {
+      methodStatic.classList.add('hidden');
+      methodVideo.classList.remove('hidden');
+      var vid = methodVideo.querySelector('video');
+      vid.play().catch(function() {});
+    });
+    backMethodBtn.addEventListener('click', function() {
+      var vid = methodVideo.querySelector('video');
+      vid.pause();
+      vid.currentTime = 0;
+      methodVideo.classList.add('hidden');
+      methodStatic.classList.remove('hidden');
+    });
+  }
 });
 
 // Scroll to top
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ===== Sticky Section Nav =====
+(function() {
+  var nav = document.getElementById('sectionNav');
+  if (!nav) return;
+  var links = nav.querySelectorAll('.section-nav__link');
+  var sections = [];
+  links.forEach(function(link) {
+    var id = link.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) sections.push({ id: id, el: el, link: link });
+  });
+
+  var lastActive = null;
+
+  function update() {
+    // Highlight active section
+    var current = null;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      var rect = sections[i].el.getBoundingClientRect();
+      if (rect.top <= 100) { current = sections[i]; break; }
+    }
+    if (current !== lastActive) {
+      links.forEach(function(l) { l.classList.remove('active'); });
+      if (current) current.link.classList.add('active');
+      lastActive = current;
+    }
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
 
 // Copy BibTeX
 function copyBibTeX() {

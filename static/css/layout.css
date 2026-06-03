@@ -1,16 +1,95 @@
 /* ========== Layout: Sections, Spacing, Responsive ========== */
 
+/* Flatten Bulma nesting — mimic reference sites (asymflow 1120px, speed 1280px) */
+.container.is-max-desktop {
+  max-width: 1200px;
+}
+
+/* Kill Bulma's nested column padding so content fills the container */
+.columns.is-centered {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Reduce gap between section heading and body */
+.columns.is-centered:not(:last-child) {
+  margin-bottom: 0;
+}
+
+.title.is-3 {
+  margin-bottom: 0.75rem;
+}
+
+.column.is-four-fifths {
+  width: 100%;
+  flex: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .section {
-  padding: 4rem 1.5rem;
+  padding: clamp(3rem, 8vh, 5rem) clamp(1rem, 4vw, 2.5rem);
 }
 
 .hero-body {
-  padding: 4rem 1.5rem;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(1rem, 4vw, 2.5rem);
 }
 
 .hero.teaser .hero-body {
   padding-top: 0;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
+}
+
+/* Teaser: SinDDM narrower, Ours wider */
+.teaser-card--trained {
+  flex: 0.7;
+}
+
+.teaser-card--ours {
+  flex: 1.3;
+}
+
+/* Ours card two-column internal layout (input | generated) */
+.ours-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.ours-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.ours-col--input .ours-input-preview {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.ours-col--output .ours-slideshow__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.ours-col--output .ours-megapixel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.ours-col--output .ours-megapixel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 /* Section alternating backgrounds */
@@ -46,6 +125,22 @@
 
   .hero-body {
     padding: 2.5rem 1rem;
+  }
+
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-text {
+    text-align: center;
+  }
+
+  .hero-text .publication-links {
+    justify-content: center;
+  }
+
+  .sinddm-compact .teaser-card__content {
+    flex-direction: column;
   }
 
   .teaser-comparison {
