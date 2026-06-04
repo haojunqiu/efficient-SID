@@ -142,13 +142,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const remM = Math.floor((remSec % 3600) / 60);
         sinddmRemaining.textContent = '~' + remH + 'h ' + remM + 'm remaining';
       }, 1000);
-      // Show skip button after 10s
-      skipTimeout = setTimeout(function() {
-        if (!trainingDone && skipBtn) {
-          skipBtn.style.display = 'inline-block';
-          skipBtn.classList.add('visible');
-        }
-      }, 10000);
+      // Show skip button immediately
+      if (!trainingDone && skipBtn) {
+        skipBtn.style.display = 'inline-block';
+        skipBtn.classList.add('visible');
+      }
     }
 
     // Skip button handler
