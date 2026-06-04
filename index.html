@@ -39,9 +39,9 @@
   <!-- CSS (order matters) -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/base.css">
-  <link rel="stylesheet" href="static/css/layout.css?v=11">
+  <link rel="stylesheet" href="static/css/layout.css?v=12">
   <link rel="stylesheet" href="static/css/components.css?v=9">
-  <link rel="stylesheet" href="static/css/animations.css?v=9">
+  <link rel="stylesheet" href="static/css/animations.css?v=10">
   <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
@@ -205,7 +205,6 @@
                     <div class="ours-input-thumb" data-input="3"><img src="static/images/teaser/ours/moon/input.png" alt="Moon"></div>
                   </div>
                 </div>
-                <img class="ours-input-preview" id="oursInputPreview" src="static/images/teaser/ours/succulent/input.png" alt="Selected input">
               </div>
               <!-- Right: Generated outputs -->
               <div class="ours-col ours-col--output">
@@ -217,8 +216,16 @@
                     <img class="ours-slide-item ours-slide-hidden" id="oursSlide2" src="static/images/teaser/ours/succulent/1.png" alt="Generated 3">
                   </div>
                 </div>
-                <div class="ours-megapixel" id="oursMegapixel">
-                  <img class="ours-megapixel__img" id="oursMegapixelImg" src="static/images/teaser/ours/succulent/1.png" alt="Full-resolution output">
+              </div>
+              <!-- Zoom row: spans full width, equal sized -->
+              <div class="ours-zoom-row">
+                <div class="ours-zoom ours-zoom--input">
+                  <img class="ours-input-preview" id="oursInputPreview" src="static/images/teaser/ours/succulent/input.png" alt="Selected input">
+                </div>
+                <div class="ours-zoom ours-zoom--output">
+                  <div class="ours-megapixel" id="oursMegapixel">
+                    <img class="ours-megapixel__img" id="oursMegapixelImg" src="static/images/teaser/ours/succulent/1.png" alt="Full-resolution output">
+                  </div>
                 </div>
               </div>
             </div>
@@ -231,8 +238,8 @@
         </div>
 
         <h2 class="subtitle has-text-centered" style="margin-top: 1.5rem; font-size: 1.1rem;">
-          <strong>Zero training. One second. Diverse generation.</strong><br>
-          <span style="color: var(--text-secondary);">A closed-form denoiser eliminates neural network training — generating megapixel images in under a second, gigapixel in minutes.</span>
+          <strong>Zero training. Less than 1s per sample. Diverse generation.</strong><br>
+          <span style="color: var(--text-secondary);">A closed-form denoiser running in patch space eliminates neural network training from prior works — generating megapixel images in under a second, gigapixel in minutes.</span>
         </h2>
 
       </div>
@@ -320,6 +327,9 @@
             </p>
             <p style="font-size: 1.15rem; font-weight: 600; text-align: center; color: var(--text-primary); margin: 2rem 0;">
               No neural network. No training. No optimization.
+            </p>
+            <p style="text-align: center; color: var(--text-secondary);">
+              Check out a related tutorial at CVPR 2026: <a href="https://analytic-diffusion.github.io" target="_blank">Analytic Understanding of Diffusion Models</a>.
             </p>
           </div>
 
